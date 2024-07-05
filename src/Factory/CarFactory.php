@@ -10,6 +10,25 @@ use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
  */
 final class CarFactory extends PersistentProxyObjectFactory
 {
+    private $brandCars = [
+        'Toyota',
+        'Ford',
+        'BMW',
+        'Mercedes-Benz',
+        'Tesla',
+        'Honda',
+        'Chevrolet',
+        'Audi',
+        'Nissan',
+        'Volkswagen',
+        'Hyundai',
+        'Kia',
+        'Lexus',
+        'Mazda',
+        'Subaru',
+    ];
+
+
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
      */
@@ -28,7 +47,10 @@ final class CarFactory extends PersistentProxyObjectFactory
     protected function defaults(): array|callable
     {
         return [
+            'brand' => self::faker()->text(255),
             'numberOfDoors' => self::faker()->randomNumber(),
+            'brand' => self::faker()->randomElement($this->brandCars),
+            'createdAt' => self::faker()->dateTimeBetween('-1 month')
         ];
     }
 

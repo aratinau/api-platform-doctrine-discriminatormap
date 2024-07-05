@@ -2,26 +2,19 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\BikeRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: BikeRepository::class)]
 #[ApiResource]
-class Bike
+#[ApiFilter(OrderFilter::class)]
+class Bike extends Vehicle
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
-
     #[ORM\Column]
     private ?bool $hasCarrier = null;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function hasCarrier(): ?bool
     {

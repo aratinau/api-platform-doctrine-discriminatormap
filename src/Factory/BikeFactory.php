@@ -10,6 +10,23 @@ use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
  */
 final class BikeFactory extends PersistentProxyObjectFactory
 {
+    private $brandBikes = [
+        'Yamaha',
+        'Honda',
+        'Harley-Davidson',
+        'Kawasaki',
+        'Suzuki',
+        'Ducati',
+        'BMW Motorrad',
+        'Triumph',
+        'KTM',
+        'Royal Enfield',
+        'Aprilia',
+        'Indian Motorcycle',
+        'MV Agusta',
+        'Husqvarna',
+        'Moto Guzzi'
+    ];
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
      */
@@ -28,7 +45,10 @@ final class BikeFactory extends PersistentProxyObjectFactory
     protected function defaults(): array|callable
     {
         return [
+            'brand' => self::faker()->text(255),
             'hasCarrier' => self::faker()->boolean(),
+            'brand' => self::faker()->randomElement($this->brandBikes),
+            'createdAt' => self::faker()->dateTimeBetween('-1 month')
         ];
     }
 

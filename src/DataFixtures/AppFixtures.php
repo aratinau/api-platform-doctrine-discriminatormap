@@ -16,7 +16,6 @@ class AppFixtures extends Fixture
 
         BikeFactory::createMany(20);
         CarFactory::createMany(20);
-        VehicleFactory::createMany(20);
 
         $manager->flush();
     }
