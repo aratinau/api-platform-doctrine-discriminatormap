@@ -2,7 +2,7 @@
 
 namespace App\Factory;
 
-use App\Entity\Car;
+use App\Entity\Vehicle\Car;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
 /**
