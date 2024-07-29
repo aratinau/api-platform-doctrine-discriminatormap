@@ -2,33 +2,14 @@
 
 namespace App\Factory;
 
-use App\Entity\Vehicle\Car;
+use App\Entity\Category;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
 /**
- * @extends PersistentProxyObjectFactory<Car>
+ * @extends PersistentProxyObjectFactory<Category>
  */
-final class CarFactory extends PersistentProxyObjectFactory
+final class CategoryFactory extends PersistentProxyObjectFactory
 {
-    private $brandCars = [
-        'Toyota',
-        'Ford',
-        'BMW',
-        'Mercedes-Benz',
-        'Tesla',
-        'Honda',
-        'Chevrolet',
-        'Audi',
-        'Nissan',
-        'Volkswagen',
-        'Hyundai',
-        'Kia',
-        'Lexus',
-        'Mazda',
-        'Subaru',
-    ];
-
-
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
      */
@@ -38,7 +19,7 @@ final class CarFactory extends PersistentProxyObjectFactory
 
     public static function class(): string
     {
-        return Car::class;
+        return Category::class;
     }
 
     /**
@@ -47,9 +28,8 @@ final class CarFactory extends PersistentProxyObjectFactory
     protected function defaults(): array|callable
     {
         return [
-            'numberOfDoors' => self::faker()->randomNumber(),
-            'brand' => self::faker()->randomElement($this->brandCars),
-            'createdAt' => self::faker()->dateTimeBetween('-1 month')
+            'color' => self::faker()->hexColor(),
+            'name' => ucfirst(self::faker()->word()),
         ];
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Factory;
 
+use App\DataFixtures\CategoryFixtures;
 use App\Entity\Vehicle\Bike;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
@@ -45,10 +46,10 @@ final class BikeFactory extends PersistentProxyObjectFactory
     protected function defaults(): array|callable
     {
         return [
-            'brand' => self::faker()->text(255),
             'hasCarrier' => self::faker()->boolean(),
             'brand' => self::faker()->randomElement($this->brandBikes),
-            'createdAt' => self::faker()->dateTimeBetween('-1 month')
+            'createdAt' => self::faker()->dateTimeBetween('-1 month'),
+            'categories' => CategoryFactory::randomRange(1, 5)
         ];
     }
 
