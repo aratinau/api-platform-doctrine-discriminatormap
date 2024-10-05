@@ -3,27 +3,27 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
-use App\Repository\CategoryRepository;
+use App\Repository\ImportanceRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Attribute\Groups;
 
-#[ORM\Entity(repositoryClass: CategoryRepository::class)]
+#[ORM\Entity(repositoryClass: ImportanceRepository::class)]
 #[ApiResource(paginationEnabled: false)]
-class Category
+class Importance
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['category:read', 'courier:read'])]
+    #[Groups(['importance:read', 'courier:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['category:read', 'courier:read'])]
+    #[Groups(['importance:read', 'courier:read'])]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255)]
-    #[Groups(['category:read', 'courier:read'])]
-    private ?string $color = null;
+    #[ORM\Column]
+    #[Groups(['importance:read', 'courier:read'])]
+    private ?int $value = null;
 
     public function getId(): ?int
     {
@@ -42,14 +42,14 @@ class Category
         return $this;
     }
 
-    public function getColor(): ?string
+    public function getValue(): ?int
     {
-        return $this->color;
+        return $this->value;
     }
 
-    public function setColor(string $color): static
+    public function setValue(int $value): static
     {
-        $this->color = $color;
+        $this->value = $value;
 
         return $this;
     }

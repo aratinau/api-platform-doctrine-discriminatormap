@@ -2,7 +2,6 @@
 
 namespace App\Factory;
 
-use App\DataFixtures\CategoryFixtures;
 use App\Entity\Vehicle\Bike;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 

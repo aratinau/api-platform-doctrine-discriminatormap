@@ -1,5 +1,10 @@
 # Api-platform Doctrine DiscrimnatorMaps
 
+## Includes
+
+✅ AuthorInterface
+✅ CurrentUserIsAuthorInterface
+
 ## Start project
 
 `make up`
@@ -8,7 +13,29 @@ Update database `docker compose exec php php bin/console d:s:u --force`
 
 Fill with fixtures `docker compose exec php php bin/console doctrine:fixtures:load --no-interaction`
 
-## Usage
+## Logins
+
+POST /api/login_check
+
+##### Elise
+
+```json
+{
+    "email": "elise60@noos.fr",
+    "password": "1234"
+}
+```
+
+##### Bertrand
+
+```json
+{
+    "email": "bsmith@smith.fr",
+    "password": "1234"
+}
+```
+
+## Usage With Vehicle
 
 Using order on alls
 `GET https://localhost/vehicles?order[createdAt]=desc`
