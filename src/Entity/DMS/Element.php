@@ -14,6 +14,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ElementRepository::class)]
 #[ORM\InheritanceType('JOINED')]
@@ -34,22 +35,27 @@ abstract class Element implements AuthorInterface, CurrentUserIsAuthorInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['element:read'])]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['element:read', 'element:write'])]
     private ?string $description = null;
 
     /**
      * @var Collection<int, Category>
      */
     #[ORM\ManyToMany(targetEntity: Category::class)]
+    #[Groups(['element:read'])]
     private Collection $categories;
 
     #[ORM\Column(length: 30)]
+    #[Groups(['element:read', 'element:write'])]
     private ?string $direction = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['element:read'])]
     private ?User $author = null;
 
     public function __construct()

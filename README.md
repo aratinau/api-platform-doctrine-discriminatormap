@@ -1,9 +1,41 @@
 # Api-platform Doctrine DiscrimnatorMaps
 
+> I created this repository to showcase the use of DiscriminatorMap, as well as a listener that automatically attaches the connected user. It also includes a Doctrine extension that filters and returns only the data belonging to the authenticated user. Additionally, there is a SerializerContextBuilder that allows reading and writing attributes.
+
 ## Includes
 
-✅ AuthorInterface
-✅ CurrentUserIsAuthorInterface
+- ✅ **DiscriminatorMap (in Element.php):**
+
+  Uses DiscriminatorMap to associate the values 'email' and 'paper' with their respective classes. This entity implements the `AuthorInterface` and `CurrentUserIsAuthorInterface`. It also leverages several annotations related to Doctrine and ApiPlatform, such as `#[ApiFilter]` for handling filters and `#[Groups]` for managing serialization groups.
+
+- ✅ **AuthorInterface.php:**
+
+  This file defines an `AuthorInterface` that ensures the presence of a `getAuthor()` method. The currently authenticated user is then assigned using the `AttachAuthorDoctrineListener`.
+
+- ✅ **CurrentUserIsAuthorInterface.php:**
+
+  This file defines the `CurrentUserIsAuthorInterface`, which is used to verify if the current user is the author of an element. It then applies the `CurrentUserIsAuthorExtension` to ensure that authors can only access their created elements.
+
+- ✅ **SerializerContextBuilder.php:**
+
+  This file contains a class that extends `SerializerContextBuilderInterface` and overrides the `createFromRequest()` method to add custom serialization groups based on the resource type and operation (collection, item, etc.). It also enables adding groups for parent classes, enhancing the flexibility of serialization levels depending on entities and their relationships. For instance, using the attribute `#[Groups(['element:read', 'element:write'])]`.
+
+### Most interesting parts 🚀
+
+- `src/DoctrineExtension/CurrentUserIsAuthorExtension.php`
+
+
+- `src/DoctrineListener/AttachAuthorDoctrineListener.php`
+
+
+- `src/Entity/DMS/Element.php`
+- `src/Entity/DMS/Email.php`
+- `src/Entity/DMS/Paper.php`
+- `src/Entity/AuthorInterface.php`
+- `src/Entity/CurrentUserIsAuthorInterface.php`
+
+
+- `src/Serializer/SerializerContextBuilder.php`
 
 ## Start project
 

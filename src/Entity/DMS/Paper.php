@@ -6,12 +6,14 @@ use ApiPlatform\Metadata\ApiResource;
 use App\Repository\DMS\PaperRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: PaperRepository::class)]
 #[ApiResource]
 class Paper extends Element
 {
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['element:read', 'element:write'])]
     private ?string $content = null;
 
     public function getContent(): ?string
