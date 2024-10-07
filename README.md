@@ -79,7 +79,7 @@ Get all cars
 `GET https://localhost/bikes`
 
 Using Filter
-`GET https://localhostvehicles?categories[]=/categories/12`
+`GET https://localhost/vehicles?categories[]=/categories/12`
 
 ### Vehicle
 
